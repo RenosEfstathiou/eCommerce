@@ -1,12 +1,13 @@
 import React from 'react';
-import { Card, CardImg } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
+import Rating from './Rating';
 
 const Product = ({ product }) => {
   return (
     <div>
       <Card className='my-3 p-3 rounded'>
         <a href={`/product/${product._id}`}>
-          <CardImg src={product.image} variant='top' />
+          <Card.Img src={product.image} variant='top' />
         </a>
 
         <Card.Body>
@@ -18,11 +19,16 @@ const Product = ({ product }) => {
 
           <Card.Text as='div'>
             <div className='my-3'>
-              {product.rating} from {product.numReviews} reviews
+              <Rating
+                value={product.rating}
+                text={`${product.numReviews} reviews`}
+              />
             </div>
           </Card.Text>
 
-          <Card.Text as='h3'>&#36;{product.price}</Card.Text>
+          <Card.Text as='h3' className='mt-1'>
+            &#36;{product.price}
+          </Card.Text>
         </Card.Body>
       </Card>
     </div>
