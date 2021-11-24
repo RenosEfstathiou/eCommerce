@@ -1,9 +1,9 @@
-import { Schema, model } from 'mongoose';
+import mongoose from 'mongoose';
 
-const orderSchema = Schema(
+const orderSchema = mongoose.Schema(
   {
     user: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'User'
     },
@@ -13,7 +13,11 @@ const orderSchema = Schema(
         qty: { type: Number, required: true },
         image: { type: String, required: true },
         price: { type: Number, required: true },
-        product: { type: Schema.Types.ObjectId, required: true, ref: 'Product' }
+        product: {
+          type: mongoose.Schema.Types.ObjectId,
+          required: true,
+          ref: 'Product'
+        }
       }
     ],
     shippingAddress: {
@@ -69,4 +73,6 @@ const orderSchema = Schema(
   }
 );
 
-export default Order = model('Order', orderSchema);
+const Order = mongoose.model('Order', orderSchema);
+
+export default Order;
