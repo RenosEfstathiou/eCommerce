@@ -24,7 +24,7 @@ router.get(
 );
 
 /**
- * @desc   Fetch product by poduct id
+ * @desc   Fetch product by product id
  * @route  /api/products/:id
  * @access Public
  */
@@ -40,4 +40,5 @@ router.get(
     res.status(200).json(product);
   })
 );
+
 export default router;
