@@ -31,6 +31,12 @@ const Product = ({ product }) => {
             &#36;{product.price}
           </Card.Text>
         </Card.Body>
+
+        <Card.Footer className='text-center'>
+          {product.countInStock > 0
+            ? `${product.countInStock} Left in stock`
+            : 'Out of stock'}
+        </Card.Footer>
       </Card>
     </div>
   );
