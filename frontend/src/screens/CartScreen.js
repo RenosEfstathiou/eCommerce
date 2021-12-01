@@ -3,9 +3,9 @@ import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap';
 import Message from '../components/Message.js';
-import { addToCart } from '../actions/cartActions.js';
+import { addToCart, removeFromCart, clearCart } from '../actions/cartActions.js';
 
-const CartScreen = props => {
+const CartScreen = () => {
   const { productId } = useParams();
   const [searchParams] = useSearchParams();
 
@@ -24,7 +24,11 @@ const CartScreen = props => {
   }, [dispatch, productId, qty]);
 
   const removeFromCartHandler = productId => {
-    console.log('remove');
+    dispatch(removeFromCart(productId));
+  };
+
+  const clearCartHandler = () => {
+    dispatch(clearCart());
   };
 
   const checkoutHandler = () => {
@@ -94,6 +98,10 @@ const CartScreen = props => {
             <ListGroup.Item>
               <Button type='button' className='btn-block' disabled={cartItems.length === 0} onClick={checkoutHandler}>
                 Proceed to checkout
+              </Button>
+
+              <Button className='btn-block' variant='link' disabled={cartItems.length === 0} onClick={clearCartHandler}>
+                Clear Cart
               </Button>
             </ListGroup.Item>
           </ListGroup>
