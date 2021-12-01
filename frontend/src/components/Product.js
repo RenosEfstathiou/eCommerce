@@ -20,10 +20,7 @@ const Product = ({ product }) => {
 
           <Card.Text as='div'>
             <div className='my-3'>
-              <Rating
-                value={product.rating}
-                text={`${product.numReviews} reviews`}
-              />
+              <Rating value={product.rating} text={`${product.numReviews} reviews`} />
             </div>
           </Card.Text>
 
@@ -33,9 +30,7 @@ const Product = ({ product }) => {
         </Card.Body>
 
         <Card.Footer className='text-center'>
-          {product.countInStock > 0
-            ? `${product.countInStock} Left in stock`
-            : 'Out of stock'}
+          {product.countInStock > 0 ? `${product.countInStock} Left in stock` : 'Out of stock'}
         </Card.Footer>
       </Card>
     </div>
