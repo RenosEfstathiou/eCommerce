@@ -1,45 +1,13 @@
 import express from 'express';
-import asyncHandler from 'express-async-handler';
-
-// Shemas
-import Product from '../models/productModel.js';
 
 // express route init
 const router = express.Router();
 
+// Controllers
+import { getProducts, getProductById } from '../controllers/productController.js';
+
 // basic routing
-
-/**
- * @desc   Fetch all products
- * @route  /api/products
- * @access Public
- */
-router.get(
-  '/',
-  asyncHandler(async (req, res) => {
-    const products = await Product.find();
-
-    return res.status(200).json(products);
-  })
-);
-
-/**
- * @desc   Fetch product by product id
- * @route  /api/products/:id
- * @access Public
- */
-router.get(
-  '/:id',
-  asyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
-
-    if (!product) {
-      res.status(404);
-      throw new Error('Product not found!');
-    }
-
-    res.status(200).json(product);
-  })
-);
+router.route('/').get(getProducts);
+router.route('/:id').get(getProductById);
 
 export default router;
