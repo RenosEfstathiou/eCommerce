@@ -45,6 +45,7 @@ const LoginScreen = () => {
         <Form.Group className='mb-2' controlId='email'>
           <Form.Label>Email adress</Form.Label>
           <Form.Control
+            className='rounded'
             type='email'
             placeholder='Enter email'
             value={email}
@@ -55,6 +56,7 @@ const LoginScreen = () => {
         <Form.Group className='mb-2' controlId='password'>
           <Form.Label>Password</Form.Label>
           <Form.Control
+            className='rounded'
             type='password'
             placeholder='Enter password'
             value={password}
@@ -62,7 +64,7 @@ const LoginScreen = () => {
           ></Form.Control>
         </Form.Group>
 
-        <Button className='mb-2' variant='primary' type='submit'>
+        <Button className='mb-2 rounded' variant='primary' type='submit'>
           Log In
         </Button>
       </Form>
