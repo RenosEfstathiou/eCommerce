@@ -7,14 +7,24 @@ const router = express.Router();
 import { protect } from '../middleware/authMiddleware.js';
 
 // Controllers
-import { authUser, getUserProfile, registerUser } from '../controllers/userController.js';
+import {
+  authUser,
+  getUserProfile,
+  getUserProfileByUserId,
+  registerUser,
+  updateUserProfile
+} from '../controllers/userController.js';
 
 // basic routing
 
-// get requests
+//profile routes
 router.route('/profile').get(protect, getUserProfile);
+router.route('/profiles/:id').get(protect, getUserProfileByUserId);
 
 // post requests
 router.post('/login', authUser);
 router.route('/register').post(registerUser);
+
+// put routes
+router.route('/profile').put(protect, updateUserProfile);
 export default router;

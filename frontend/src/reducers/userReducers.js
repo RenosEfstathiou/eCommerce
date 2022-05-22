@@ -6,7 +6,10 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
-  USER_REGISTER_CLEAR_ERRORS
+  USER_REGISTER_CLEAR_ERRORS,
+  USER_DETAILS_REQUEST,
+  USER_DETAILS_SUCCESS,
+  USER_DETAILS_FAIL
 } from '../constants/userConstants.js';
 
 export const userLoginReducer = (state = {}, action) => {

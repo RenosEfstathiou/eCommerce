@@ -8,7 +8,7 @@ import User from '../models/userModel.js';
 /**
  * @desc   Get User profile
  * @route  GET /api/users/profile
- * @access Public
+ * @access Private
  */
 const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user.id);
@@ -19,6 +19,59 @@ const getUserProfile = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin
+    });
+  } else {
+    res.status(404);
+    throw new Error('User not found!');
+  }
+});
+
+/**
+ * @desc   Get User profile
+ * @route  GET /api/users/profiles/:id
+ * @access Private
+ */
+const getUserProfileByUserId = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email
+    });
+  } else {
+    res.status(404);
+    throw new Error('User not found!');
+  }
+});
+
+/**
+ * @desc   Update User profile
+ * @route  PUT /api/users/profiles
+ * @access Private
+ */
+const updateUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user.id);
+
+  const { name, email, password } = req.body;
+
+  if (user) {
+    user.name = name || user.name;
+    user.email = email || user.email;
+
+    if (password) {
+      user.password = password;
+    }
+
+    const updatedUser = await user.save();
+
+    res.status(200).json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+      token: generateToken(updatedUser._id)
     });
   } else {
     res.status(404);
@@ -84,4 +137,4 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, getUserProfile, registerUser };
+export { authUser, getUserProfile, getUserProfileByUserId, registerUser, updateUserProfile };
